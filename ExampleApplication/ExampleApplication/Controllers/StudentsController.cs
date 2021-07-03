@@ -24,11 +24,7 @@ namespace ExampleApplication.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index(
-            string sortOrder, 
-            string currentFilter,
-            string searchString,
-            int? pageNumber)
+        public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
             ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -48,8 +44,7 @@ namespace ExampleApplication.Controllers
             var students = from s in _context.Students
                            select s;
 
-            int size = students.Count();
-            Console.WriteLine("student size : " + size);
+            int total = students.Count(); // total num of students 
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -71,6 +66,7 @@ namespace ExampleApplication.Controllers
                     students = students.OrderBy(s => s.LastName);
                     break;
             }
+
             int pageSize = 3;
            
             /*PaginatedList.CreateAsync method converts the student query
