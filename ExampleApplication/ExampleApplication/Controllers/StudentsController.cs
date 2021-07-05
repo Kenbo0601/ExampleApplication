@@ -78,7 +78,7 @@ namespace ExampleApplication.Controllers
         }
 
         // GET: Students/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id) //test comment
         {
             if (id == null)
             {
