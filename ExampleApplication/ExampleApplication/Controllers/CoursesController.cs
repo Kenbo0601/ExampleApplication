@@ -33,17 +33,27 @@ namespace ExampleApplication.Controllers
             {
                 return NotFound();
             }
+            
+            //--- eager loading method ---//
 
+            //LINQ Method syntax
             var course = await _context.Courses
                 .Include(c => c.Department)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseID == id);
-            if (course == null)
+                .AsNoTracking() //read only scenario. if you don't need to update a database, this is quicker
+                .Where(m => m.CourseID == id)
+                .FirstOrDefaultAsync(); //.FirstOrDefaultAsync(m => m.CourseID == id); 
+            
+            //LINQ Query syntax
+            var course2 = await (from s in _context.Courses.Include(c => c.Department)
+                           where s.CourseID == id
+                           select s).FirstOrDefaultAsync();
+
+            if (course2 == null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            return View(course2);
         }
 
         // GET: Courses/Create
