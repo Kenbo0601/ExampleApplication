@@ -12,6 +12,11 @@ namespace ExampleApplication.Controllers
 {
     public class CoursesController : Controller
     {
+        //SchoolContext can be used in ASP.NET Core controllers or other 
+        //services through constructor injection. 
+        //The final result is a SchoolContext instance created for each request and 
+        //passed to the controller to perform a unit-of-work before being disposed 
+        //when the request ends.
         private readonly SchoolContext _context;
 
         public CoursesController(SchoolContext context)

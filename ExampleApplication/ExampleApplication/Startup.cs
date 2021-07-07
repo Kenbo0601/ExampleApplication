@@ -25,8 +25,15 @@ namespace ExampleApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //--- Composition root ---//
+
+            //registers a DbContext subclass called SchoolContext as a scoped service
+            //in the ASP.NET Core application service provider(aka the DI container).
+            //The context is configured to use the SQL Server daabase provider and will read 
+            //the connection string from ASP.NET Core configuration. 
             services.AddDbContext<SchoolContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDatabaseDeveloperPageExceptionFilter(); //provides helpful information 
 
             services.AddControllersWithViews();

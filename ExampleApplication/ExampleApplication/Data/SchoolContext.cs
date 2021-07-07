@@ -5,6 +5,9 @@ namespace ExampleApplication.Data
 {
     public class SchoolContext : DbContext
     {
+        //The SchoolContext class must expose a public constructor with a 
+        //DbContextOptions<ApplicationDbContext> parameter. 
+        //This is how context configuration from AddDbContext is passed to the DbContext.
         public SchoolContext(DbContextOptions<SchoolContext> options) : base(options)
         {
         }
