@@ -42,18 +42,29 @@ namespace ExampleApplication.Controllers
                 .AsNoTracking() //read only scenario. if you don't need to update a database, this is quicker
                 .Where(m => m.CourseID == id)
                 .FirstOrDefaultAsync(); //.FirstOrDefaultAsync(m => m.CourseID == id); 
-            
+
             //LINQ Query syntax
             var course2 = await (from s in _context.Courses.Include(c => c.Department)
-                           where s.CourseID == id
-                           select s).FirstOrDefaultAsync();
+                                 where s.CourseID == id
+                                 //orderby s.Title descending
+                                 select s).
+                                 FirstOrDefaultAsync();
+            
+            //IEnumeable is better for in-memory collection or local queries
+            //Filter logic is executed on client's side
+            IEnumerable<Course> course3 = _context.Courses.Include(c => c.Department).Where(m => m.CourseID == id);
+            //IQueryable is better for remote database 
+            //Filter logic is executed on server side (or remote database) 
+            IQueryable<Course> course4 = _context.Courses.Include(c => c.Department).Where(m => m.CourseID == id);
+
+            Console.Write(course2);
 
             if (course2 == null)
             {
                 return NotFound();
             }
 
-            return View(course2);
+            return View(course4.FirstOrDefault());
         }
 
         // GET: Courses/Create
