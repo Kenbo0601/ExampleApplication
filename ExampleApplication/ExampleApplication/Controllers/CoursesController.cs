@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExampleApplication.Data;
 using ExampleApplication.Models;
+using ExampleApplication.Services.Interfaces;
 
 namespace ExampleApplication.Controllers
 {
     public class CoursesController : Controller
     {
+        private readonly ICourseService _courseService;
+
         //SchoolContext can be used in ASP.NET Core controllers or other 
         //services through constructor injection. 
         //The final result is a SchoolContext instance created for each request and 
@@ -19,17 +22,23 @@ namespace ExampleApplication.Controllers
         //when the request ends.
         private readonly SchoolContext _context;
 
-        public CoursesController(SchoolContext context)
+        public CoursesController(ICourseService courseService) 
         {
-            _context = context;
+            _courseService = courseService;
         }
 
         // GET: Courses
-        public async Task<IActionResult> Index()
+        /*public async Task<IActionResult> Index()
         {
             var schoolContext = _context.Courses.Include(c => c.Department);
             return View(await schoolContext.ToListAsync());
+        }*/
+
+        public IActionResult Index()
+        {
+            return View(_courseService.index());
         }
+
 
         // GET: Courses/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -69,7 +78,10 @@ namespace ExampleApplication.Controllers
                 return NotFound();
             }
 
-            return View(course4.FirstOrDefault());
+            var result = _courseService.details(id); //involking the service/repository method 
+
+            //return View(course4.FirstOrDefault());
+            return View(result);
         }
 
         // GET: Courses/Create
@@ -97,7 +109,7 @@ namespace ExampleApplication.Controllers
             PopulateDepartmentsDropDownList(course.DepartmentID);
             return View(course);
         }
-
+        
         // GET: Courses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -154,7 +166,10 @@ namespace ExampleApplication.Controllers
             return View(courseToUpdate);
         }
 
-
+        private void PopulateDepartmentsDropDownListHelper()
+        {
+            return;
+        }
         private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
         {
             var departmentsQuery = from d in _context.Departments

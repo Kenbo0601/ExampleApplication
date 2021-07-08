@@ -10,6 +10,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using ExampleApplication.Data;
 using Microsoft.EntityFrameworkCore;
+using ExampleApplication.Services;
+using ExampleApplication.Services.Interfaces;
+using ExampleApplication.Repositories;
+using ExampleApplication.Repositories.Interfaces;
+
 
 namespace ExampleApplication
 {
@@ -35,6 +40,8 @@ namespace ExampleApplication
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter(); //provides helpful information 
+            services.AddTransient<ICourseService, CourseService>();
+            services.AddTransient<ICourseRepository, CourseRepository>();
 
             services.AddControllersWithViews();
         }
