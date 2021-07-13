@@ -334,3 +334,8 @@ C:\Users\Kenichi Sakamoto\Desktop\ExampleApplication-master\ExampleApplication\E
 C:\Users\Kenichi Sakamoto\Desktop\ExampleApplication-master\ExampleApplication\ExampleApplication\obj\Debug\net5.0\ref\ExampleApplication.dll
 C:\Users\Kenichi Sakamoto\Desktop\ExampleApplication-master\ExampleApplication\ExampleApplication\obj\Debug\net5.0\ExampleApplication.pdb
 C:\Users\Kenichi Sakamoto\Desktop\ExampleApplication-master\ExampleApplication\ExampleApplication\obj\Debug\net5.0\ExampleApplication.genruntimeconfig.cache
+C:\Users\Kenichi Sakamoto\source\repos\ExampleApplication\ExampleApplication\obj\Debug\net5.0\Razor\Views\test\Create.cshtml.g.cs
+C:\Users\Kenichi Sakamoto\source\repos\ExampleApplication\ExampleApplication\obj\Debug\net5.0\Razor\Views\test\Delete.cshtml.g.cs
+C:\Users\Kenichi Sakamoto\source\repos\ExampleApplication\ExampleApplication\obj\Debug\net5.0\Razor\Views\test\Details.cshtml.g.cs
+C:\Users\Kenichi Sakamoto\source\repos\ExampleApplication\ExampleApplication\obj\Debug\net5.0\Razor\Views\test\Edit.cshtml.g.cs
+C:\Users\Kenichi Sakamoto\source\repos\ExampleApplication\ExampleApplication\obj\Debug\net5.0\Razor\Views\test\Index.cshtml.g.cs

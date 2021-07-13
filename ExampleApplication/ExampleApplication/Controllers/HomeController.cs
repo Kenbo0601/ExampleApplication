@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ExampleApplication.Data;
 using ExampleApplication.Models.SchoolViewModels;
-using Microsoft.Extensions.Logging;
 
 namespace ExampleApplication.Controllers
 {
