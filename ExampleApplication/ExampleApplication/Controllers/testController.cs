@@ -7,24 +7,37 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExampleApplication.Data;
 using ExampleApplication.Models;
+using ExampleApplication.Services.Interfaces;
 
 namespace ExampleApplication.Controllers
 {
     public class testController : Controller
     {
+        private readonly ItestService _testService;
         private readonly SchoolContext _context;
 
-        public testController(SchoolContext context)
+        public testController(ItestService testService)
         {
-            _context = context;
+            _testService = testService;
         }
+        
+        //test function to use the repository pattern 
+        //the Task class represents a single operation that does not 
+        //return a value and that usually executes asynchronously.
 
         // GET: test
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
+        {
+            return View(_testService.getData());
+        }
+
+        /*public async Task<IActionResult> Index()
         {
             var schoolContext = _context.Courses.Include(c => c.Department);
             return View(await schoolContext.ToListAsync());
-        }
+        }*/
+
+
 
         // GET: test/Details/5
         public async Task<IActionResult> Details(int? id)
