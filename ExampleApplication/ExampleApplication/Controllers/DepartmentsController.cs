@@ -33,16 +33,23 @@ namespace ExampleApplication.Controllers
             {
                 return NotFound();
             }
-
+            
+            //method syntax
             var department = await _context.Departments
                 .Include(d => d.Administrator)
                 .FirstOrDefaultAsync(m => m.DepartmentID == id);
-            if (department == null)
+            
+            //query syntax
+            var department2 = await (from d in _context.Departments.Include(dp => dp.Administrator)
+                                     where d.DepartmentID == id
+                                     select d).FirstOrDefaultAsync();
+
+            if (department2 == null)
             {
                 return NotFound();
             }
 
-            return View(department);
+            return View(department2);
         }
 
         // GET: Departments/Create
@@ -211,12 +218,19 @@ namespace ExampleApplication.Controllers
             {
                 return NotFound();
             }
-
+            
+            //method syntax
             var department = await _context.Departments
                 .Include(d => d.Administrator)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.DepartmentID == id);
-            if (department == null)
+            
+            //query syntax
+            var department2 = await (from d in _context.Departments.Include(dp => dp.Administrator)
+                                     where d.DepartmentID == id
+                                     select d).FirstOrDefaultAsync();
+
+            if (department2 == null)
             {
                 if (concurrencyError.GetValueOrDefault())
                 {
@@ -235,7 +249,7 @@ namespace ExampleApplication.Controllers
                     + "click the Back to List hyperlink.";
             }
 
-            return View(department);
+            return View(department2);
         }
 
         // POST: Departments/Delete/5

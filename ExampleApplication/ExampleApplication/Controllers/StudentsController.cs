@@ -84,19 +84,25 @@ namespace ExampleApplication.Controllers
             {
                 return NotFound();
             }
-
+            
+            //method syntax
             var student = await _context.Students
                 .Include(s => s.Enrollments)
                     .ThenInclude(e => e.Course)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
+            
+            //query syntax
+            var student2 = await (from s in _context.Students.Include(x => x.Enrollments).ThenInclude(e => e.Course)
+                                  where s.ID == id
+                                  select s).FirstOrDefaultAsync();
 
-            if (student == null)
+            if (student2 == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(student2);
         }
 
         // GET: Students/Create
@@ -140,6 +146,7 @@ namespace ExampleApplication.Controllers
             }
 
             var student = await _context.Students.FindAsync(id);
+
             if (student == null)
             {
                 return NotFound();
