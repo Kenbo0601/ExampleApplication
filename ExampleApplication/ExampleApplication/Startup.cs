@@ -23,6 +23,7 @@ namespace ExampleApplication
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        //The ConfigureServices method is optional.
         public void ConfigureServices(IServiceCollection services)
         {
             //--- Composition root ---//
@@ -40,6 +41,7 @@ namespace ExampleApplication
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        //Configure middleware here using IApplicationBuilder instance
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -52,6 +54,7 @@ namespace ExampleApplication
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            //app.UseWelcomePage(); welcome page middleware
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
