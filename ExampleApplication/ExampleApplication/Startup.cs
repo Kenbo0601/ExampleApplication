@@ -56,7 +56,7 @@ namespace ExampleApplication
             }
             //app.UseWelcomePage(); welcome page middleware
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles(); //allows wwwroot file to use
 
             app.UseRouting();
 

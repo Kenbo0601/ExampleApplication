@@ -23,7 +23,7 @@ namespace ExampleApplication.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string param = null)
         {
             return View();
         }
@@ -31,6 +31,7 @@ namespace ExampleApplication.Controllers
         public IActionResult Privacy()
         {
             return View();
+            //return Redirect("~/Home/About"); just a practice. this redirects to whatever the route you specified
         }
 
         public async Task<ActionResult> About()
@@ -45,11 +46,17 @@ namespace ExampleApplication.Controllers
                 };
             return View(await data.AsNoTracking().ToListAsync());
         }
-
+        
+        //does not allow cache 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            //the syntax above is simplified version of the code below
+            //if (RequestId = null)
+            //      RequestId = HttpContext.TraceIdentifier
+            //else
+            //      RequestId = Activity.Current.Id
         }
     }
 }
